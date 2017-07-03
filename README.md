@@ -9,6 +9,11 @@ The initial commit to this project repository is leveraged from an existing refe
 
 More to follow as effort continues...
 
+Did some code refactoring and added a simple GPIO unit test to
+verify behavior of the relays on the I/O interface card I crafted.
+Still need to make unit test code for the I2C temperature sensors
+after the GPIO board wiring is completed.
+
 Next chore is to modify the existing C code to be more in line with C++ (11) best practices. Am now looking for some useful guidelines on porting from C to C++.
 
 
