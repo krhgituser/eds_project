@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 // LCD16x2.cpp
 //
-// Date : 14March2017
+// Date : 9April2017
 //
 // Description: API and device driver code for the 16x2 LCD daughter board for Odroid-C2
 //-------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ s32 lcdBoardInit()
    for(unsigned int i = 0; i < MAX_LED_CNT; i++)
    {
       pinMode(ledPorts[i], OUTPUT);
-      pullUpDnControl(PORT_BUTTON1, PUD_OFF);
+      pullUpDnControl(ledPorts[i], PUD_OFF);
    }
 
    for(unsigned int i = 0; i < MAX_LED_CNT; i++)
@@ -73,6 +73,16 @@ s32 lcdBoardInit()
    pullUpDnControl(PORT_BUTTON1, PUD_UP);
    pinMode(PORT_BUTTON2, INPUT);
    pullUpDnControl(PORT_BUTTON2, PUD_UP);
+
+   // GPIO Init(control signals all as outputs)
+   pinMode(PI_GPIOX8, OUTPUT);
+   pullUpDnControl(PI_GPIOX8, PUD_OFF);
+   pinMode(PI_GPIOX9, OUTPUT);
+   pullUpDnControl(PI_GPIOX9, PUD_OFF);
+   pinMode(PI_GPIOX10, OUTPUT);
+   pullUpDnControl(PI_GPIOX10, PUD_OFF);
+   pinMode(PI_GPIOX20, OUTPUT);
+   pullUpDnControl(PI_GPIOX20, PUD_OFF);
 
    return 0;
 }

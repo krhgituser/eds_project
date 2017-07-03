@@ -6,6 +6,7 @@
     <File Name="hydronic_startup.cpp"/>
     <File Name="AS5601_i2c.cpp"/>
     <File Name="LCD16x2.cpp"/>
+    <File Name="user_interface.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

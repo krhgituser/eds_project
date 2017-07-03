@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 // hydronic_startup.cpp
 //
-// Date : 14March2017
+// Date : 9April2017
 //
 // Hydronic System Control Software Start Point
 //
@@ -25,6 +25,7 @@
 
 // function prototypes
 static int SystemInit();
+void toggleGPIOSignals();
 int main();
 
  
@@ -114,11 +115,42 @@ int main()
          sprintf(as5601_regstring, "-Angle register- degrees = %d", (int)degrees);  
       }
 
-      LedButtonUpdate();   // refresh LEDs & read pushbuttons (TODO: pushbutton detect should be re-designed for interrupt detect)
+      LedButtonUpdate();   // refresh LEDs & read pushbuttons
+                           // (TODO: pushbutton detect should be re-designed for interrupt detect or at least handled in separate thread)
 
       LcdUpdate(as5601_regstring);   // refresh LCD screen content
 
+      toggleGPIOSignals(); // test GPIO output port signals
    }
  
    return 0 ;
+}
+
+void toggleGPIOSignals()
+{
+   // test function for 3 GPIO output signals tied to connetor P5 on 16x2 LCD board
+   // signals are GPIOX.9 (pin 3); GPIOX.10 (pin 4); GPIOX.8 (pin 5)
+   // these will be used to issue control orders for Boiler Demand, Valve Open, and Valve Close
+   
+   static int sequence = 0;
+   static bool stateGPIOX9=false, stateGPIOX10=false, stateGPIOX8=false;
+   
+   switch(sequence)
+   {
+      default:
+      case 0:
+         digitalWrite (PI_GPIOX9, stateGPIOX9);
+         stateGPIOX9 = !stateGPIOX9;
+         break;
+      case 1:
+         digitalWrite (PI_GPIOX10, stateGPIOX10);
+         stateGPIOX10 = !stateGPIOX10;
+         break;
+      case 2:
+         digitalWrite (PI_GPIOX8, stateGPIOX8);
+         stateGPIOX8 = !stateGPIOX8;
+         break;
+   }
+   ++sequence;
+   sequence %= 3;
 }

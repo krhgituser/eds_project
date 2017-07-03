@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 // LCD16x2.h
 //
-// Date : 14March2017
+// Date : 9April2017
 //
 // Description: header for API and device driver code for the 16x2 LCD daughter board
 //-------------------------------------------------------------------------------------------------
@@ -22,6 +22,10 @@
 #define PORT_LCD_D6     1   // GPIOY.BIT7(#87)
 #define PORT_LCD_D7     4   // GPIOX.BIT7(#104)
 
+#define PI_GPIOX8      14   // wiringPi port 14 = GPIOX.8
+#define PI_GPIOX9      13   // wiringPi port 13 = GPIOX.9
+#define PI_GPIOX10     12   // wiringPi port 12 = GPIOX.10
+#define PI_GPIOX20     10   // wiringPi port 10 = GPIOX.20
 
 //------------------------------------------------------------------------------------------------------------
 // Buttons defined for 16x2 LCD Daughter Board:
