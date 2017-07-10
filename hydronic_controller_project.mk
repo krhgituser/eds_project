@@ -2,18 +2,18 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=hydronic_controller_project
-ConfigurationName      :=Release
-WorkspacePath          := "/media/odroid/Odroid-C2_Development_Work/codelite_workspaces"
-ProjectPath            := "/media/odroid/Odroid-C2_Development_Work/Projects/hydronic"
-IntermediateDirectory  :=./Release
+ConfigurationName      :=Debug
+WorkspacePath          := "/media/odroid/Odroid-C2_Development_Work2/codelite_workspaces"
+ProjectPath            := "/media/odroid/Odroid-C2_Development_Work2/Projects/hydronic"
+IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=root
-Date                   :=09/04/17
+Date                   :=10/07/17
 CodeLitePath           :="/home/odroid/.codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
+Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := /usr/bin/ar rcu
 CXX      := /usr/bin/g++
 CC       := /usr/bin/gcc
-CXXFLAGS :=  -O2 -Wall $(Preprocessors)
-CFLAGS   :=  -O2 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -std=c++14 -std=c++11 -Wall $(Preprocessors)
+CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := /usr/bin/as
 
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix) $(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix) $(IntermediateDirectory)/LCD16x2.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix) $(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix) $(IntermediateDirectory)/user_interface.cpp$(ObjectSuffix) 
 
 
 
@@ -79,11 +79,11 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 
 $(IntermediateDirectory)/.d:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 PreBuild:
 
@@ -92,7 +92,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix): hydronic_startup.cpp $(IntermediateDirectory)/hydronic_startup.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work/Projects/hydronic/hydronic_startup.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work2/Projects/hydronic/hydronic_startup.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/hydronic_startup.cpp$(DependSuffix): hydronic_startup.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/hydronic_startup.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/hydronic_startup.cpp$(DependSuffix) -MM "hydronic_startup.cpp"
 
@@ -100,20 +100,20 @@ $(IntermediateDirectory)/hydronic_startup.cpp$(PreprocessSuffix): hydronic_start
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/hydronic_startup.cpp$(PreprocessSuffix) "hydronic_startup.cpp"
 
 $(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix): AS5601_i2c.cpp $(IntermediateDirectory)/AS5601_i2c.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work/Projects/hydronic/AS5601_i2c.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work2/Projects/hydronic/AS5601_i2c.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/AS5601_i2c.cpp$(DependSuffix): AS5601_i2c.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/AS5601_i2c.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/AS5601_i2c.cpp$(DependSuffix) -MM "AS5601_i2c.cpp"
 
 $(IntermediateDirectory)/AS5601_i2c.cpp$(PreprocessSuffix): AS5601_i2c.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/AS5601_i2c.cpp$(PreprocessSuffix) "AS5601_i2c.cpp"
 
-$(IntermediateDirectory)/LCD16x2.cpp$(ObjectSuffix): LCD16x2.cpp $(IntermediateDirectory)/LCD16x2.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work/Projects/hydronic/LCD16x2.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/LCD16x2.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/LCD16x2.cpp$(DependSuffix): LCD16x2.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/LCD16x2.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/LCD16x2.cpp$(DependSuffix) -MM "LCD16x2.cpp"
+$(IntermediateDirectory)/user_interface.cpp$(ObjectSuffix): user_interface.cpp $(IntermediateDirectory)/user_interface.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/odroid/Odroid-C2_Development_Work2/Projects/hydronic/user_interface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/user_interface.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/user_interface.cpp$(DependSuffix): user_interface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/user_interface.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/user_interface.cpp$(DependSuffix) -MM "user_interface.cpp"
 
-$(IntermediateDirectory)/LCD16x2.cpp$(PreprocessSuffix): LCD16x2.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/LCD16x2.cpp$(PreprocessSuffix) "LCD16x2.cpp"
+$(IntermediateDirectory)/user_interface.cpp$(PreprocessSuffix): user_interface.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/user_interface.cpp$(PreprocessSuffix) "user_interface.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
@@ -121,6 +121,6 @@ $(IntermediateDirectory)/LCD16x2.cpp$(PreprocessSuffix): LCD16x2.cpp
 ## Clean
 ##
 clean:
-	$(RM) -r ./Release/
+	$(RM) -r ./Debug/
 
 

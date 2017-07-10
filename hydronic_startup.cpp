@@ -1,34 +1,28 @@
 //------------------------------------------------------------------------------------------------
 // hydronic_startup.cpp
 //
-// Date : 9April2017
+// Date : 10uly2017
 //
 // Hydronic System Control Software Start Point
 //
-// Evolved from reference software for ODROID-C printing time Application.
-//
-// Defined port number is wiringPi port number.
+// Evolved from weather board reference software for ODROID-C.
 //
 //-------------------------------------------------------------------------------------------------
  
 #include <iostream>
 
-#include <stdio.h>      // sprintf()
- 
+#include <stdio.h>      // sprintf() 
 #include <unistd.h>     // usleep()
 
 #include "hydronic_types.h"
 #include "AS5601_i2c.h"
-#include "LCD16x2.h"
-
+#include "user_interface.h"
 
 
 // function prototypes
 static int SystemInit();
-void toggleGPIOSignals();
 int main();
 
- 
 //------------------------------------------------------------------------------------
 // useful debug tool
 //   std::cout << __func__ << ": __func__ = current function name" << std::endl;
@@ -47,10 +41,10 @@ int main();
 //------------------------------------------------------------------------------------
 static int SystemInit()
 {
-   // initialization for 16X2 LCD display daughter board
-   if(lcdBoardInit() < 0)
+//   if (UI::getInst()->initialize_API() < 0)  // run user interface initializer
+   if (ui->initialize_API() < 0)  // run user interface initializer
    {
-      std::cout << __func__ << ": lcd Init failed" << std::endl;
+      std::cout << __func__ << ": UI Init failed" << std::endl;
       return -1;
    }
 
@@ -68,7 +62,7 @@ static int SystemInit()
 //------------------------------------------------------------------------------------
 // main
 //
-// Hydronic heating controller application - initial startup function
+// Hydronic heating controller application (such as it is)
 //
 // parameters
 //    input:  none
@@ -78,18 +72,17 @@ int main()
 {
    std::cout << "Starting Hydronic System Control Software..." << std::endl;
 
-   if (wiringPiSetup() != 0)
+   if (wiringPiSetup() != 0)  // install/activate Odroid GPIO device driver
    {      
       std::cout << __func__ << ": wiringPi Init failed" << std::endl;
       return -1;
    }
  
-   if (SystemInit() < 0)
+   if (SystemInit() < 0)      // run application initializer
    {
       std::cout << __func__ << ": System Init failed" << std::endl;
       return -1;
    }
-
 
    std::cout << __func__ << ": System Init Success!" << std::endl;
    std::cout << __func__ << ": Launching primary application control loop..." << std::endl;
@@ -115,42 +108,14 @@ int main()
          sprintf(as5601_regstring, "-Angle register- degrees = %d", (int)degrees);  
       }
 
-      LedButtonUpdate();   // refresh LEDs & read pushbuttons
-                           // (TODO: pushbutton detect should be re-designed for interrupt detect or at least handled in separate thread)
+      ui->LedButtonUpdate();              // refresh LEDs & read pushbuttons
+                                          // (TODO: pushbutton detect should be re-designed for interrupt detect or at least handled in separate thread)
 
-      LcdUpdate(as5601_regstring);   // refresh LCD screen content
+      ui->LcdUpdate(as5601_regstring);    // refresh LCD screen content
 
-      toggleGPIOSignals(); // test GPIO output port signals
+      ui->toggleGPIOSignals();            // test GPIO output port signals
    }
  
    return 0 ;
 }
 
-void toggleGPIOSignals()
-{
-   // test function for 3 GPIO output signals tied to connetor P5 on 16x2 LCD board
-   // signals are GPIOX.9 (pin 3); GPIOX.10 (pin 4); GPIOX.8 (pin 5)
-   // these will be used to issue control orders for Boiler Demand, Valve Open, and Valve Close
-   
-   static int sequence = 0;
-   static bool stateGPIOX9=false, stateGPIOX10=false, stateGPIOX8=false;
-   
-   switch(sequence)
-   {
-      default:
-      case 0:
-         digitalWrite (PI_GPIOX9, stateGPIOX9);
-         stateGPIOX9 = !stateGPIOX9;
-         break;
-      case 1:
-         digitalWrite (PI_GPIOX10, stateGPIOX10);
-         stateGPIOX10 = !stateGPIOX10;
-         break;
-      case 2:
-         digitalWrite (PI_GPIOX8, stateGPIOX8);
-         stateGPIOX8 = !stateGPIOX8;
-         break;
-   }
-   ++sequence;
-   sequence %= 3;
-}
